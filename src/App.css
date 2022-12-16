@@ -1,0 +1,127 @@
+:root {
+    --err: hsl(0, 100%, 66%);
+    --white: hsl(0, 0%, 100%);
+    --violet-100: hsl(270, 3%, 87%);
+    --violet-200: hsl(270, 3%, 87%);
+    --violet-300: hsl(249, 99%, 64%);
+    --violet-400: hsl(278, 94%, 30%);
+    --violet-500: hsl(278, 68%, 11%);
+    --grad: linear-gradient(var(--violet-300), var(--violet-400));
+    --fs-xsmall: 8px;
+    --fs-small: 10px;
+    --fs-main: 18px;
+    --fw-main: 500;
+    --ff-main: "Space Grotesk";
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    src: url('./assets/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--ff-main);
+    line-height: 1;
+    color: var(--violet-500);
+
+    margin: 0;
+}
+
+.container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.form__wrapper,
+.form__fieldset {
+    position: relative;
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: 0.5em;
+
+    font-size: var(--fs-xsmall);
+
+    height: 4rem;
+}
+
+.form__wrapper__title {
+    font-size: var(--fs-small);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.form>:nth-child(-n + 2),
+.form__fieldset>:first-child,
+.form__submit {
+    grid-column: 1 / span 2;
+}
+
+.form__fieldset {
+    grid-template-columns: 1fr 1fr;
+    border: none;
+    column-gap: 1em;
+    padding: 0;
+    margin: 0; 
+}
+
+.form__input {
+    position: relative;
+    border: 1px solid var(--violet-100);
+    border-radius: 5px;
+
+    outline: none;
+
+    display: block;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+
+    padding: 10px;
+}
+
+.form__wrapper.invalid > .form__input {
+    border: 1px solid var(--err);
+}
+
+.form__wrapper.invalid > .message {
+    color: var(--err);
+}
+
+.form__input::-webkit-outer-spin-button,
+.form__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.form__input:not([type="submit"]):focus {
+    background: linear-gradient(#fff, #fff) padding-box,
+        var(--grad) border-box;
+    border: 1px solid transparent;
+}
+
+.form__submit .form__input {
+    color: var(--white);
+    background-color: var(--violet-500);
+}
+
+.form__submit .form__input:focus,
+.form__submit .form__input:hover {
+    background-color: var(--violet-400);
+}
