@@ -1,0 +1,16 @@
+.field__name,
+.field__message {
+    margin: 0;
+}
+
+.field__name {
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.field__message {
+    visibility: hidden;
+    font-size: 0.65em;
+}

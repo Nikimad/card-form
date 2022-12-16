@@ -1,27 +1,35 @@
 import './App.css';
+import Field from './Field/Field';
+import Input from './Input/Input';
+
 import { useImmer } from 'use-immer';
 
 const App = () => {
   const [formState, updateFormState] = useImmer({
     name: {
       value: '',
-      validity: null
+      validity: 'processing',
+      validityMessage: null
     },
     number: {
       value: '',
-      validity: null
+      validity: 'processing',
+      validityMessage: null
     },
     month: {
       value: '',
-      validity: null
+      validity: 'processing',
+      validityMessage: null
     },
     year: {
       value: '',
-      validity: null
+      validity: 'processing',
+      validityMessage: null
     },
     cvc: {
       value: '',
-      validity: null
+      validity: 'processing',
+      validityMessage: null
     },
     status: 'editable'
   });
@@ -30,48 +38,51 @@ const App = () => {
     field: {
       name: (name) => updateFormState((draft) => {
         draft.name.value = name;
-        draft.name.validity = null;
+        draft.name.validity = 'processing';
       }),
       number: (number) => updateFormState((draft) => {
         draft.number.value = number;
-        draft.number.validity = null;
+        draft.number.validity = 'processing';
       }),
       month: (month) => updateFormState((draft) => {
         draft.month.value = month;
-        draft.month.validity = null;
+        draft.month.validity = 'processing';
       }),
       year: (year) => updateFormState((draft) => {
         draft.year.value = year;
-        draft.year.validity = null;
+        draft.year.validity = 'processing';
       }),
       cvc: (cvc) => updateFormState((draft) => {
         draft.cvc.value = cvc;
-        draft.cvc.validity = null;
+        draft.cvc.validity = 'processing';
       }),
     },
     validity: {
-      name: (validity) => updateFormState((draft) => {
+      name: (validity, message) => updateFormState((draft) => {
         draft.name.validity = validity;
+        draft.name.validityMessage = message;
       }),
-      number: (validity) => updateFormState((draft) => {
+      number: (validity, message) => updateFormState((draft) => {
         draft.number.validity = validity;
+        draft.number.validityMessage = message;
       }),
-      month: (validity) => updateFormState((draft) => {
+      month: (validity, message) => updateFormState((draft) => {
         draft.month.validity = validity;
+        draft.month.validityMessage = message;
       }),
-      year: (validity) => updateFormState((draft) => {
+      year: (validity, message) => updateFormState((draft) => {
         draft.year.validity = validity;
+        draft.year.validityMessage = message;
       }),
-      cvc: (validity) => updateFormState((draft) => {
+      cvc: (validity, message) => updateFormState((draft) => {
         draft.cvc.validity = validity;
+        draft.cvc.validityMessage = message;
       }),
     }
   };
 
   const submit = (e) => {
     e.preventDefault();
-
-    console.log('sunb')
 
     checkValidity('name');
     checkValidity('number');
@@ -84,79 +95,63 @@ const App = () => {
     });
   };
 
-  const checkValidity = (key) => update.validity[key](formState[key].value.length === 0 ? "Can't be blank" : null);
+  const checkValidity = (key) => {
+    if (formState[key].value.length === 0) return update.validity[key]('invalid', 'Can\'t be blank');
+    return update.validity[key]('valid', 'valid');
+  }
 
   return (
     <div className='container'>
-      <div className='card'>
-        <div className='card__front'></div>
-        <div className='card__back'></div>
-      </div>
       <form className='form' onSubmit={ (e) => submit(e) }>
-        <label className={`form__wrapper ${!formState.name.validity ? '': 'invalid'}`} htmlFor='name'>
-          <span className="form__wrapper__title">cardholder name</span>
-          <input
-            className='form__input'
+        <Field name='cardholder name' validityMessage={ [formState.name.validityMessage] }>
+          <Input
             id='name'
             type='text'
-            onChange={ (e) => update.field.name(e.target.value) }
-            value={ formState.name.value }
             placeholder='e.g. Jane Appleseed'
+            value={ formState.name.value }
+            validity={ formState.name.validity }
+            onChange={ (e) => update.field.name(e.target.value) }
           />
-          { <span className='message'>{formState.name.validity}</span> || null }
-        </label>
-        <label className={`form__wrapper ${!formState.number.validity ? '': 'invalid'}`} htmlFor='number'>
-          <span className="form__wrapper__title">card number</span>
-          <input
-            className='form__input'
+        </Field>
+        <Field name="card number" validityMessage= { [formState.number.validityMessage] }>
+          <Input
             id='number'
             type='tel'
-            onChange={ (e) => update.field.number(e.target.value) }
-            value={ formState.number.value }
             placeholder='e.g. 1234 5678 9123 0000'
+            value={ formState.number.value }
+            validity={ formState.number.validity }
+            onChange={ (e) => update.field.number(e.target.value) }
           />
-          { <span className='message'>{formState.number.validity}</span> || null }
-        </label>
-        <fieldset className='form__fieldset'>
-          <span className="form__wrapper__title">exp. date (mm/yy)</span>
-          <label className={`form__wrapper ${!formState.month.validity ? '': 'invalid'}`} htmlFor='month'>
-            <input
-            className='form__input'
-              id='month'
-              type='number'
-              onChange={ (e) => update.field.month(e.target.value) }
-              value={ formState.month.value }
-              placeholder='MM'
-            />
-            { <span className='message'>{formState.month.validity}</span> || null }
-          </label>
-          <label className={`form__wrapper ${!formState.year.validity ? '': 'invalid'}`} htmlFor='year'>
-            <input
-              className='form__input'
-              id='year'
-              type='number'
-              onChange={ (e) => update.field.year(e.target.value) }
-              value={ formState.year.value }
-              placeholder='YY'
-            />
-            { <span className='message'>{formState.year.validity}</span> || null }
-          </label>
-        </fieldset>
-        <label className={`form__wrapper ${!formState.cvc.validity ? '': 'invalid'}`} htmlFor='cvc'>
-          <span className="form__wrapper__title">cvc</span>
-          <input
-            className='form__input'
+        </Field>
+        <Field name="exp. date (mm/yy)" validityMessage= { [formState.month.validityMessage, formState.year.validityMessage] }>
+          <Input
+            id='month'
+            type='number'
+            placeholder='MM'
+            value={ formState.month.value }
+            validity={ formState.month.validity }
+            onChange={ (e) => update.field.month(e.target.value) }
+          />
+          <Input
+            id='year'
+            type='number'
+            placeholder='YY'
+            value={ formState.year.value }
+            validity={ formState.year.validity }
+            onChange={ (e) => update.field.year(e.target.value) }
+          />
+        </Field>
+        <Field name="cvc" validityMessage= { [formState.cvc.validityMessage] }>
+          <Input
             id='cvc'
             type='number'
-            onChange={ (e) => update.field.cvc(e.target.value) }
-            value={ formState.cvc.value }
             placeholder='e.g. 123'
+            value={ formState.cvc.value }
+            validity={ formState.cvc.validity }
+            onChange={ (e) => update.field.cvc(e.target.value) }
           />
-          { <span className='message'>{formState.cvc.validity}</span> || null }
-        </label>
-        <label className='form__wrapper form__submit' htmlFor='submit'>
-        <input className='form__input' id='submit' type='submit' value='Confirm'/>
-        </label>
+        </Field>
+        <input type='submit'/>
       </form>
     </div>
   );

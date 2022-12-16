@@ -1,0 +1,22 @@
+.input {
+    border: 1px solid var(--violet-100);
+    border-radius: 5px;
+
+    outline: none;
+
+    padding: 10px;
+}
+
+.input:not([type="submit"]):focus {
+    background: linear-gradient(#fff, #fff) padding-box, var(--grad) border-box;
+    border: 1px solid transparent;
+}
+
+.field__label_invalid .input {
+    border: 1px solid var(--err);
+}
+
+.field__label_invalid ~.message {
+    visibility: visible;
+    color: var(--err);
+}
