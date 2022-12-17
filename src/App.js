@@ -1,6 +1,8 @@
 import './App.css';
+import Form from './Form/Form';
 import Field from './Field/Field';
 import Input from './Input/Input';
+import Card from './Card/Card';
 
 import { useImmer } from 'use-immer';
 
@@ -102,7 +104,8 @@ const App = () => {
 
   return (
     <div className='container'>
-      <form className='form' onSubmit={ (e) => submit(e) }>
+        <Card/>
+        <Form onSubmit={ (e) => submit(e) }>
         <Field name='cardholder name' validityMessage={ [formState.name.validityMessage] }>
           <Input
             id='name'
@@ -151,8 +154,8 @@ const App = () => {
             onChange={ (e) => update.field.cvc(e.target.value) }
           />
         </Field>
-        <input type='submit'/>
-      </form>
+        <input className='submit' type='submit' value='Confirm'/>
+        </Form>
     </div>
   );
 }

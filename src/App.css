@@ -7,18 +7,63 @@
     --violet-400: hsl(278, 94%, 30%);
     --violet-500: hsl(278, 68%, 11%);
     --grad: linear-gradient(var(--violet-300), var(--violet-400));
-    --fs-xsmall: 8px;
-    --fs-small: 10px;
     --fs-main: 18px;
     --fw-main: 500;
     --ff-main: "Space Grotesk";
 }
 
 @font-face {
-    font-family: "Space Grotesk";
+    font-family: 'Space Grotesk';
     src: url('./assets/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf');
 }
 
 * {
     box-sizing: border-box;
 }
+
+.body {
+    font-size: var(--fs-main);
+    line-height: 1.2;
+    font-family: var(--ff-main), sans-serif;
+
+    min-height: 100vh;
+
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.submit {
+    font: inherit;
+    color: var(--white);
+    padding: 10px;
+
+    border: 0;
+    border-radius: 5px;
+    background-color: var(--violet-500);
+
+    transition: 0.3s;
+
+    cursor: pointer;
+}
+
+.submit:hover,
+.submit:focus {
+    background-color: var(--violet-400);
+}
+
+@media (min-width: 1000px) {
+    .container {
+        flex-direction: row;;
+    
+        height: 100vh;
+    }
+}
+
+
