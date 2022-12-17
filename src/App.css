@@ -8,6 +8,7 @@
     --violet-500: hsl(278, 68%, 11%);
     --grad: linear-gradient(var(--violet-300), var(--violet-400));
     --fs-main: 18px;
+    --fs-medium: 14px;
     --fw-main: 500;
     --ff-main: "Space Grotesk";
 }
@@ -22,7 +23,7 @@
 }
 
 .body {
-    font-size: var(--fs-main);
+    font-size: var(--fs-medium);
     line-height: 1.2;
     font-family: var(--ff-main), sans-serif;
 
@@ -59,6 +60,10 @@
 }
 
 @media (min-width: 1000px) {
+
+    .body {
+        font-size: var(--fs-main);
+    }
     .container {
         flex-direction: row;;
     
