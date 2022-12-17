@@ -5,9 +5,9 @@
     align-items: center;
     justify-content: center;
 
-    gap: 2em;
+    gap: 0;
 
-    background-size: 100% 65%;
+    background-size: 100% 80%;
     background-repeat: no-repeat;
     background-image: url('../assets/images/bg-main-mobile.png');
 
@@ -32,11 +32,11 @@
     order: 1;
     background-image: url('../assets/images/bg-card-front.png');
     z-index: 1;
-    transform: translate(-10%, -50%);
+    transform: translate(-10%, -10%);
 }
 
 .card__back {
-    transform: translate(10%, 10%);
+    transform: translate(10%, 30%);
     background-image: url('../assets/images/bg-card-back.png');
 }
 
@@ -62,5 +62,6 @@
         background-image: url('../assets/images/bg-main-desktop.png');
         width: 50%;
         height: 100%;
+        gap: 2em;
     }
 }
