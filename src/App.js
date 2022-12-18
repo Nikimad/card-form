@@ -1,6 +1,7 @@
 import './App.css';
 import Form from './Form/Form';
 import Card from './Card/Card';
+import Banner from './Banner/Banner';
 
 import { useImmer } from 'use-immer';
 
@@ -95,6 +96,18 @@ const App = () => {
     });
   };
 
+  const reset = () => {
+    update.field.name('');
+    update.field.number('');
+    update.field.month('');
+    update.field.year('');
+    update.field.cvc('');
+
+    updateFormState((draft) => {
+      draft.status = 'editable';
+    });
+  }
+
   const checkValidity = (key) => {
     if (formState[key].value.length === 0) return update.validity[key]('invalid', 'Can\'t be blank');
     return update.validity[key]('valid', 'valid');
@@ -115,7 +128,7 @@ const App = () => {
   return (
     <div className='container'>
         { getCard() }
-        <Form onSubmit={ (e) => submit(e) } state={ formState } update={ update }/>
+        { formState.status === 'editable' ? <Form onSubmit={ (e) => submit(e) } state={ formState } update={ update }/> : <Banner onClick={ reset }/> }
     </div>
   );
 }

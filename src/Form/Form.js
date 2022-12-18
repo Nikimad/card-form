@@ -32,32 +32,35 @@ const Form = (props) => {
           <Field name="exp. date (mm/yy)" validityMessage= { [state.month.validityMessage, state.year.validityMessage] }>
           <Input
             id='month'
-            type='number'
+            type='tel'
             placeholder='MM'
             value={ state.month.value }
             validity={ state.month.validity }
             onChange={ (e) => update.field.month(e.target.value) }
+            maxLength={ 2 }
           />
           <Input
             id='year'
-            type='number'
+            type='tel'
             placeholder='YY'
             value={ state.year.value }
             validity={ state.year.validity }
             onChange={ (e) => update.field.year(e.target.value) }
+            maxLength={ 2 }
           />
           </Field>
           <Field name="cvc" validityMessage= { [state.cvc.validityMessage] }>
           <Input
             id='cvc'
-            type='number'
+            type='text'
             placeholder='e.g. 123'
             value={ state.cvc.value }
             validity={ state.cvc.validity }
             onChange={ (e) => update.field.cvc(e.target.value) }
+            maxLength={ 3 }
           />
           </Field>
-          <Input id='submit' type='submit'/>
+          <Input id='submit' type='submit' value='Confirm'/>
         </form>
     );
 };

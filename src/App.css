@@ -27,6 +27,7 @@
     font-weight: var(--fw-main);
     line-height: 1.2;
     font-family: var(--ff-main), sans-serif;
+    color: var(--violet-500);
 
     min-height: 100vh;
 

@@ -1,0 +1,47 @@
+.banner {
+    display: grid;
+    grid-auto-columns: 100%;
+    gap: 2em;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+}
+
+.banner__logo {
+    width: 100%;
+    height: 60px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../assets/images/icon-complete.svg');
+}
+
+.banner__body {
+    display: grid;
+    gap: 1em;
+}
+
+.banner__title,
+.banner__message {
+    margin: 0;
+}
+
+.banner__title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.banner__message {
+    font-size: 16px;
+    color: hsl(249, 20%, 63%);
+} 
+
+@media (min-width: 1000px) {
+    .banner {
+        gap: 4em;
+    }
+}
