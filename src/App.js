@@ -1,7 +1,5 @@
 import './App.css';
 import Form from './Form/Form';
-import Field from './Field/Field';
-import Input from './Input/Input';
 import Card from './Card/Card';
 
 import { useImmer } from 'use-immer';
@@ -102,60 +100,22 @@ const App = () => {
     return update.validity[key]('valid', 'valid');
   }
 
+  const getCard = () => {
+    const fields = ['name', 'number', 'month', 'year', 'cvc'].reduce((acc, field) => {
+      if (formState[field].value.length > 0) {
+        acc[field] = formState[field].value;
+      }
+
+      return acc;
+    }, {});
+
+    return <Card { ...fields }/>;
+  }
+
   return (
     <div className='container'>
-        <Card/>
-        <Form onSubmit={ (e) => submit(e) }>
-        <Field name='cardholder name' validityMessage={ [formState.name.validityMessage] }>
-          <Input
-            id='name'
-            type='text'
-            placeholder='e.g. Jane Appleseed'
-            value={ formState.name.value }
-            validity={ formState.name.validity }
-            onChange={ (e) => update.field.name(e.target.value) }
-          />
-        </Field>
-        <Field name="card number" validityMessage= { [formState.number.validityMessage] }>
-          <Input
-            id='number'
-            type='tel'
-            placeholder='e.g. 1234 5678 9123 0000'
-            value={ formState.number.value }
-            validity={ formState.number.validity }
-            onChange={ (e) => update.field.number(e.target.value) }
-          />
-        </Field>
-        <Field name="exp. date (mm/yy)" validityMessage= { [formState.month.validityMessage, formState.year.validityMessage] }>
-          <Input
-            id='month'
-            type='number'
-            placeholder='MM'
-            value={ formState.month.value }
-            validity={ formState.month.validity }
-            onChange={ (e) => update.field.month(e.target.value) }
-          />
-          <Input
-            id='year'
-            type='number'
-            placeholder='YY'
-            value={ formState.year.value }
-            validity={ formState.year.validity }
-            onChange={ (e) => update.field.year(e.target.value) }
-          />
-        </Field>
-        <Field name="cvc" validityMessage= { [formState.cvc.validityMessage] }>
-          <Input
-            id='cvc'
-            type='number'
-            placeholder='e.g. 123'
-            value={ formState.cvc.value }
-            validity={ formState.cvc.validity }
-            onChange={ (e) => update.field.cvc(e.target.value) }
-          />
-        </Field>
-        <input className='submit' type='submit' value='Confirm'/>
-        </Form>
+        { getCard() }
+        <Form onSubmit={ (e) => submit(e) } state={ formState } update={ update }/>
     </div>
   );
 }
